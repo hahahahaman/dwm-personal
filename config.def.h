@@ -33,6 +33,11 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Pcmanfm",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Fsearch",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Chromium", NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -51,25 +56,45 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+// Mod4 windows key
+// Mod1 Alt key
+#define ALTKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+// Used to define hotkeys for keypad
+#define MORETAGKEYS(KEY,TAG) \
+    { 0,                     KEY,      view,           {.ui = 1 << TAG} }, \
+	{ ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+/* static const char *termcmd[]  = { "terminator", NULL }; */
+static const char *termcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", "-e", "bash", NULL };
+static const char *emacscmd[]  = { "emacsclient", "-nc", NULL };
+static const char *webcmd[] = { "firefox", NULL };
+static const char *filecmd[] = { "pcmanfm", NULL };
+static const char *searchcmd[] = { "fsearch", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_z,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = termcmd } },
+    { MODKEY|ShiftMask,             XK_a,      spawn,          {.v = emacscmd } },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = webcmd } },
+    { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = filecmd } },
+    { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = searchcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -100,6 +125,17 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+
+	MORETAGKEYS(                    XK_KP_End,                 0)
+	MORETAGKEYS(                    XK_KP_Down,                1)
+	MORETAGKEYS(                    XK_KP_Page_Down,           2)
+	MORETAGKEYS(                    XK_KP_Left,                3)
+	MORETAGKEYS(                    XK_KP_Begin,               4)
+	MORETAGKEYS(                    XK_KP_Right,               5)
+	MORETAGKEYS(                    XK_KP_Home,                6)
+	MORETAGKEYS(                    XK_KP_Up,                  7)
+	MORETAGKEYS(                    XK_KP_Page_Up,             8)
+
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 

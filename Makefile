@@ -26,7 +26,9 @@ dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+	@echo cleaning
+	@rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+	@rm config.h
 
 dist: clean
 	mkdir -p dwm-${VERSION}
