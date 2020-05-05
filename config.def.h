@@ -32,12 +32,15 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Copyq",    NULL,       NULL,       0,            1,           -1 },
 	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "Pcmanfm",  NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Fsearch",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Recoll",   NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Anki",     NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Discord",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "Chromium", NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Mozilla Firefox", NULL, NULL,      1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -80,33 +83,34 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 /* static const char *termcmd[]  = { "terminator", NULL }; */
-static const char *termcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", "-e", "bash", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-nc", NULL };
 static const char *webcmd[] = { "firefox", NULL };
-static const char *filecmd[] = { "pcmanfm", NULL };
+static const char *filecmd[] = { "thunar", NULL };
 static const char *searchcmd[] = { "fsearch", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_c,      spawn,          {.v = clipmenucmd } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = termcmd } },
     { MODKEY|ShiftMask,             XK_a,      spawn,          {.v = emacscmd } },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = webcmd } },
     { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = filecmd } },
     { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = searchcmd } },
+	{ MODKEY|ShiftMask,             XK_w,      killclient,     {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_j,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      incnmaster,     {.i = -1 } },
 	{ ALTKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ ALTKEY|ShiftMask,             XK_Tab,    focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -140,7 +144,6 @@ static Key keys[] = {
 	MORETAGKEYS(                    XK_KP_Up,                  7)
 	MORETAGKEYS(                    XK_KP_Page_Up,             8)
 
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
 /* button definitions */
