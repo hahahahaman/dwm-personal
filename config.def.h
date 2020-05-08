@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -16,10 +16,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char col_sel_color[]   = "#7851A9";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_sel_color  },
 };
 
 /* tagging */
@@ -35,12 +36,13 @@ static const Rule rules[] = {
 	{ "Copyq",    NULL,       NULL,       0,            1,           -1 },
 	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Thunar",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Fsearch",  NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Recoll",   NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "recoll",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Anki",     NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Discord",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "Chromium", NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Mozilla Firefox", NULL, NULL,      1 << 8,       0,           -1 },
+	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -102,7 +104,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = searchcmd } },
 	{ MODKEY|ShiftMask,             XK_w,      killclient,     {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask|ControlMask, XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_j,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      incnmaster,     {.i = -1 } },
 	{ ALTKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
