@@ -41,7 +41,7 @@ static const Rule rules[] = {
 	{ "recoll",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Anki",     NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Discord",  NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "Chromium", NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Chromium", NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
