@@ -37,6 +37,8 @@ static const Rule rules[] = {
 	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Thunar",   NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Doublecmd", NULL,      NULL,       1 << 2,       0,           -1 },
+	{ "Thunar",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Fsearch",  NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "recoll",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Anki",     NULL,       NULL,       1 << 3,       0,           -1 },
@@ -90,7 +92,7 @@ static const char *clipmenucmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufon
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-nc", NULL };
 static const char *webcmd[] = { "firefox", NULL };
-static const char *filecmd[] = { "thunar", NULL };
+static const char *filecmd[] = { "doublecmd", NULL };
 static const char *searchcmd[] = { "fsearch", NULL };
 
 static Key keys[] = {
