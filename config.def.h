@@ -52,12 +52,13 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 #include "fibonacci.c"
 static const Layout layouts[] = {
+    /* first entry is default */
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+    { "[\\]",     dwindle },
+	{ "[]=",      tile },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "[@]",      spiral },
-	{ "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -86,8 +87,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-/* static const char *termcmd[]  = { "terminator", NULL }; */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-nc", NULL };
 static const char *webcmd[] = { "firefox", NULL };
 static const char *filecmd[] = { "thunar", NULL };
