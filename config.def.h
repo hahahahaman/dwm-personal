@@ -32,19 +32,20 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Copyq",    NULL,       NULL,       0,            1,           -1 },
-	{ "Emacs",    NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "Thunar",   NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Doublecmd", NULL,      NULL,       1 << 2,       0,           -1 },
-	{ "Thunar",   NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Fsearch",  NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "recoll",   NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Anki",     NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Discord",  NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "Chromium", NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,            0 },
+	{ "Copyq",    NULL,       NULL,       0,            1,            0 },
+	{ "Emacs",    NULL,       NULL,       1 << 0,       0,            0 },
+	{ "tabbed",   NULL,       NULL,       1 << 1,       0,            0 },
+	{ "Thunar",   NULL,       NULL,       1 << 2,       0,            0 },
+	{ "Doublecmd", NULL,      NULL,       1 << 2,       0,            0 },
+	{ "Thunar",   NULL,       NULL,       1 << 2,       0,            0 },
+	{ "Sunflower", NULL,      NULL,       1 << 2,       0,            0 },
+	{ "Fsearch",  NULL,       NULL,       1 << 2,       0,            0 },
+	{ "recoll",   NULL,       NULL,       1 << 2,       0,            0 },
+	{ "Anki",     NULL,       NULL,       1 << 3,       0,            0 },
+	{ "Discord",  NULL,       NULL,       1 << 7,       0,            0 },
+	{ "Chromium", NULL,       NULL,       1 << 7,       0,            0 },
+	{ "firefox",  NULL,       NULL,       1 << 8,       0,            0 },
 };
 
 /* layout(s) */
@@ -92,7 +93,7 @@ static const char *clipmenucmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufon
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-nc", NULL };
 static const char *webcmd[] = { "firefox", NULL };
-static const char *filecmd[] = { "doublecmd", NULL };
+static const char *filecmd[] = { "thunar", NULL };
 static const char *searchcmd[] = { "fsearch", NULL };
 
 static Key keys[] = {
